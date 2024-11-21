@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Muebles</title>
+    <style>
+        /* Estilo del carrito y del mensaje emergente */
+        .cart { position: fixed; top: 0; right: -300px; background-color: #f4f4f4; padding: 20px; width: 300px; height: 100%; overflow-y: scroll; transition: transform 0.3s ease-in-out; }
+        .cart.show { transform: translateX(-300px); }
+        .cart ul { list-style-type: none; padding: 0; }
+        .cart li { margin-bottom: 10px; display: flex; align-items: center; }
+        .cart-item img { width: 50px; height: 50px; margin-right: 10px; }
+        .cart-count { position: absolute; top: -10px; right: -10px; background-color: red; color: #fff; border-radius: 50%; padding: 5px 8px; font-size: 14px; }
+        .btn-remove { background-color: #ff0000; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+        .popup-message { display: none; position: fixed; top: 20px; right: 20px; background-color: #4caf50; color: white; padding: 15px; border-radius: 5px; z-index: 1000; }
+    </style>
+</head>
+<body>
+
+    <!-- Catálogo de productos -->
+    <h1>Catálogo de Muebles</h1>
+    <div class="product">
+        <h2>Seccional Decohome Alba</h2>
+        <p>Precio: $150.00</p>
+        <img src="sofa1.jpg" alt="Seccional Decohome Alba" width="200">
+        <button onclick="addToCart('Seccional Decohome Alba', '150', 'sofa1.jpg')">Añadir al Carrito</button>
+    </div>
+
+    <div class="product">
+        <h2>Poltrona Fossvelen Tela Gris</h2>
+        <p>Precio: $250.00</p>
+        <img src="sofa2.jpg" alt="Poltrona Fossvelen Tela Gris" width="200">
+        <button onclick="addToCart('Poltrona Fossvelen Tela Gris', '250', 'sofa2.jpg')">Añadir al Carrito</button>
+    </div>
+
+    <!-- Icono y carrito de compras -->
+    <div class="cart-icon" id="cart-icon" style="position: fixed; top: 20px; right: 20px;">
+        <img src="carrito2.png" alt="Compras" style="width: 48px; cursor: pointer;">
+        <span class="cart-count" id="cart-count">0</span>
+    </div>
+
+    <div class="cart" id="cart">
+        <span class="close-cart" style="cursor: pointer;" onclick="toggleCart()">✖</span>
+        <h2>Carrito de Compras</h2>
+        <ul id="cart-items"></ul>
+        <p id="total-price">Total: $0</p>
+    </div>
+
+    <!-- Mensaje emergente -->
+    <div id="popup-message" class="popup-message">Artículo añadido al carrito</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cartIcon = document.getElementById('cart-icon');
+            const cart = document.getElementById('cart');
+            const cartItems = document.getElementById('cart-items');
+            const totalPrice = document.getElementById('total-price');
+            const popupMessage = document.getElementById('popup-message');
+
+            let cartCount = 0;
+            let total = 0;
+
+            // Cargar carrito desde localStorage
+            loadCartFromLocalStorage();
+
+            // Mostrar/ocultar carrito
+            cartIcon.addEventListener('click', function() {
+                cart.classList.toggle('show');
+            });
+
+            // Añadir producto al carrito
+            function addToCart(name, price, image) {
+                price = parseFloat(price);
+                cartCount++;
+                total += price;
+                updateCart(name, price, image);
+
+                // Mostrar mensaje emergente
+                showPopupMessage("Artículo añadido al carrito");
+            }
+
+            // Función para actualizar el carrito
+            function updateCart(name, price, image) {
+                cartItems.innerHTML += `
+                    <li class="cart-item" data-price="${price}">
+                        <img src="${image}" alt="${name}">
+                        ${name} - $${price.toFixed(2)}
+                        <button class="btn-remove" onclick="removeItem(this, ${price})">Eliminar</button>
+                    </li>
+                `;
+                totalPrice.textContent = `Total: $${total.toFixed(2)}`;
+                document.getElementById('cart-count').textContent = cartCount;
+                saveCartToLocalStorage();
+            }
+
+            // Eliminar artículo del carrito
+            function removeItem(element, price) {
+                element.parentElement.remove();
+                total -= price;
+                cartCount--;
+
+                totalPrice.textContent = `Total: $${total.toFixed(2)}`;
+                document.getElementById('cart-count').textContent = cartCount;
+                saveCartToLocalStorage();
+            }
+
+            // Guardar en localStorage
+            function saveCartToLocalStorage() {
+                localStorage.setItem('cartItems', cartItems.innerHTML);
+                localStorage.setItem('totalPrice', total);
+                localStorage.setItem('cartCount', cartCount);
+            }
+
+            // Cargar desde localStorage
+            function loadCartFromLocalStorage() {
+                const savedCartItems = localStorage.getItem('cartItems');
+                const savedTotal = localStorage.getItem('totalPrice');
+                const savedCartCount = localStorage.getItem('cartCount');
+
+                if (savedCartItems) {
+                    cartItems.innerHTML = savedCartItems;
+                    total = parseFloat(savedTotal) || 0;
+                    cartCount = parseInt(savedCartCount) || 0;
+                    totalPrice.textContent = `Total: $${total.toFixed(2)}`;
+                    document.getElementById('cart-count').textContent = cartCount;
+                }
+            }
+
+            // Mostrar mensaje emergente temporal
+            function showPopupMessage(message) {
+                popupMessage.textContent = message;
+                popupMessage.style.display = 'block';
+                setTimeout(() => {
+                    popupMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // Toggle carrito
+        function toggleCart() {
+            const cart = document.getElementById('cart');
+            cart.classList.toggle('show');
+        }
+    </script>
+
+
+    <script>
+        
+
+
+        function clearCart() {
+    // Vaciar el contenido del carrito
+    document.getElementById('cart-items').innerHTML = '';
+    total = 0;
+    cartCount = 0;
+
+    // Actualizar la interfaz
+    document.getElementById('total-price').textContent = `Total: $${total.toFixed(2)}`;
+    document.getElementById('cart-count').textContent = cartCount;
+
+    // Limpiar el carrito en localStorage
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('totalPrice');
+    localStorage.removeItem('cartCount');
+
+    // Mostrar mensaje de carrito vacío
+    showPopupMessage("Carrito vaciado");
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barra Lateral Oculta</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<style>
+
+    /* Estilos Generales */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+/* Botón para abrir la barra lateral */
+#toggleSidebarButton {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #5a523a;
+    color: white;
+    font-size: 18px;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 1001;
+    border-radius: 5px;
+}
+
+#toggleSidebarButton:hover {
+    background-color: #746844;
+}
+
+/* Barra Lateral (Oculta por defecto) */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Ocultar fuera de la vista */
+    width: 250px;
+    height: 100%;
+    background-color: #5a523a;
+    color: white;
+    padding: 20px;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Mostrar la barra lateral */
+.sidebar.show {
+    left: 0; /* Mueve la barra lateral hacia dentro de la pantalla */
+    {
+        transform: translateY(0);
+    }
+}
+
+/* Botón para cerrar la barra lateral */
+.close-sidebar {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+</style>
+<body>
+
+    <!-- Botón para abrir la barra lateral -->
+    <button id="toggleSidebarButton">☰ Menú</button>
+
+    <!-- Barra Lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="close-sidebar" onclick="toggleSidebar()">&times;</div>
+        <h2>Opciones</h2>
+        <p>Contenido de la barra lateral</p>
+        <ul>
+            <li>Opción 1</li>
+            <li>Opción 2</li>
+            <li>Opción 3</li>
+        </ul>
+    </div>
+
+    <script>
+        
+// Seleccionar elementos
+const toggleSidebarButton = document.getElementById('toggleSidebarButton');
+const sidebar = document.getElementById('sidebar');
+
+// Función para mostrar/ocultar la barra lateral
+function toggleSidebar() {
+    sidebar.classList.toggle('show');
+}
+
+// Evento para abrir/cerrar la barra lateral al hacer clic en el botón
+toggleSidebarButton.addEventListener('click', toggleSidebar);
+
+
+    </script>
+</body>
+</html>

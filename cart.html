@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda de Muebles</title>
+</head>
+<body>
+    <h1>Catálogo de Muebles</h1>
+
+    <!-- Ejemplo de un producto -->
+    <div class="product">
+        <h2>Seccional Decohome Alba</h2>
+        <p>Precio: $150.00</p>
+        <img src="sofa1.jpg" alt="Seccional Decohome Alba" width="200">
+        <button onclick="addToCart('Seccional Decohome Alba', '150', 'sofa1.jpg')">Añadir al Carrito</button>
+    </div>
+
+    <div class="product">
+        <h2>Poltrona Fossvelen Tela Gris</h2>
+        <p>Precio: $250.00</p>
+        <img src="sofa2.jpg" alt="Poltrona Fossvelen Tela Gris" width="200">
+        <button onclick="addToCart('Poltrona Fossvelen Tela Gris', '250', 'sofa2.jpg')">Añadir al Carrito</button>
+    </div>
+
+    <script>
+        // Función para enviar los datos del artículo al archivo PHP
+        function addToCart(name, price, image) {
+            const formData = new FormData();
+            formData.append('article_name', name);
+            formData.append('article_price', price);
+            formData.append('article_image', image);
+
+            fetch('guardar_articulo.php', { // Cambia por la ruta correcta del archivo PHP
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                alert('Artículo añadido al carrito');
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

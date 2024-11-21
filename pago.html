@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muebles en Venta - Confirmación de Pago</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Carrito */
+        .cart-container {
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .cart-header {
+            color: #5a523a;
+        }
+
+        .cart-item-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item-image {
+            width: 50px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        /* Botón de confirmar pago */
+        .btn-confirm-payment {
+            width: 100%;
+            padding: 12px;
+            background-color: #5a523a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .btn-confirm-payment:hover {
+            background-color: #746844;
+        }
+
+        /* Modal de confirmación de pago */
+        .modal-payment {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+        }
+
+        .modal-payment-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-payment-header {
+            color: #5a523a;
+            text-align: center;
+        }
+
+        .modal-payment-label {
+            font-weight: bold;
+            color: #5a523a;
+        }
+
+        .modal-payment-input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn-close-modal {
+            color: #5a523a;
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cart-container">
+        <h2 class="cart-header">Carrito de Compras</h2>
+        <ul id="cart-items-list">
+            <!-- Lista de artículos en el carrito -->
+            <li class="cart-item-container">
+                <img src="mesas1.jpg" alt="Mesa" class="cart-item-image" />
+                Mesa - $60.00
+            </li>
+            <li class="cart-item-container">
+                <img src="mesas2.jpg" alt="Silla" class="cart-item-image" />
+                Silla - $40.00
+            </li>
+        </ul>
+        <p>Total: $<span id="cart-total-price">100.00</span></p>
+        <button id="btn-open-payment-modal" class="btn-confirm-payment">Confirmar Pago</button>
+    </div>
+
+    <!-- Modal para confirmar el pago -->
+    <div id="payment-modal" class="modal-payment">
+        <div class="modal-payment-content">
+            <span class="btn-close-modal">&times;</span>
+            <h2 class="modal-payment-header">Detalles de Pago</h2>
+            <form id="payment-form">
+                <label for="card-number" class="modal-payment-label">Número de tarjeta:</label>
+                <input type="text" id="card-number" name="card-number" class="modal-payment-input" required>
+
+                <label for="expiry-date" class="modal-payment-label">Fecha de expiración:</label>
+                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/AA" class="modal-payment-input" required>
+
+                <label for="cvv" class="modal-payment-label">CVV:</label>
+                <input type="text" id="cvv" name="cvv" class="modal-payment-input" required>
+
+                <label for="name" class="modal-payment-label">Nombre del titular:</label>
+                <input type="text" id="name" name="name" class="modal-payment-input" required>
+
+                <button type="submit" class="btn-confirm-payment">Confirmar Pago</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Abrir modal de pago
+        document.getElementById('btn-open-payment-modal').addEventListener('click', function() {
+            const paymentModal = document.getElementById('payment-modal');
+            paymentModal.style.display = 'block';
+        });
+
+        // Cerrar modal al hacer clic en la 'X'
+        document.querySelector('.btn-close-modal').addEventListener('click', function() {
+            document.getElementById('payment-modal').style.display = 'none';
+        });
+
+        // Cerrar modal si el usuario hace clic fuera de él
+        window.onclick = function(event) {
+            const modal = document.getElementById('payment-modal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // Enviar el formulario de pago al procesar
+        document.getElementById('payment-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío predeterminado del formulario
+
+            // Realizar la solicitud para procesar el pago
+            fetch('procesar_pago.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    cardNumber: document.getElementById('card-number').value,
+                    expiryDate: document.getElementById('expiry-date').value,
+                    cvv: document.getElementById('cvv').value,
+                    name: document.getElementById('name').value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Pago procesado correctamente. Revisa tu correo.');
+                    document.getElementById('payment-modal').style.display = 'none';
+                } else {
+                    alert('Error al procesar el pago: ' + data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+</body>
+</html>

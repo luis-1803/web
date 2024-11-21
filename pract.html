@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Responsiva</title>
+    
+</head>
+<style>
+    /* Estilos generales para pantallas grandes */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.header, .footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.menu li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.menu a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contenedor {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.contenedor img {
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+}
+
+/* Media Query para tabletas (pantallas medianas) */
+@media (max-width: 768px) {
+    .header, .footer {
+        padding: 15px;
+    }
+
+    .menu li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .contenedor {
+        padding: 15px;
+    }
+}
+
+/* Media Query para móviles (pantallas pequeñas) */
+@media (max-width: 480px) {
+    .header, .footer {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .menu li {
+        margin: 5px 0;
+    }
+
+    .contenedor {
+        padding: 10px;
+    }
+
+    h1, h2 {
+        font-size: 1.5em;
+    }
+
+    .menu a {
+        font-size: 16px;
+    }
+}
+
+
+
+
+</style>
+<body>
+    <header class="header">
+        <h1>Bienvenido a Mi Página Responsiva</h1>
+    </header>
+    
+    <nav class="menu">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section class="contenedor">
+        <h2>Sección de Contenido</h2>
+        <p>Este es un ejemplo de contenido que se adaptará a diferentes tamaños de pantalla. La disposición de los elementos cambiará según el dispositivo.</p>
+        <img src="https://via.placeholder.com/600x400" alt="Imagen de ejemplo">
+    </section>
+
+    <footer class="footer">
+        <p>© 2024 Mi Página Responsiva. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

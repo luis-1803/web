@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venta de Muebles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #d8c3a5;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #8c5a3c;
+        }
+        .product {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background-color: #f5f5dc;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .product img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .product-info {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .product-info h2 {
+            margin-top: 0;
+            color: #8c5a3c;
+        }
+        .product-info p, .product-info ul {
+            margin: 5px 0;
+            color: #5a3e30;
+        }
+        .product-info .price {
+            color: #e74c3c;
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+        .cta-buttons {
+            margin-top: 20px;
+        }
+        .cta-buttons button {
+            background-color: #8c5a3c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .cta-buttons button:hover {
+            background-color: #6f432a;
+        }
+
+
+
+         .text{
+            margin: 0;
+            padding: 0;
+            font-family: Georgia, serif;
+            color: black ;
+            min-height: 100%;
+            position: relative;
+
+ font-size: 1.5em;
+    letter-spacing: 3px; /* Espaciado entre letras */
+    line-height: 1; /* Altura de línea */
+    text-align: justify; 
+        }
+
+        .header {
+            background-color:#5a523a;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .logo {
+            height: 50px;
+        }
+
+        .header nav {
+            display: flex;
+        }
+
+        .header nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .header nav .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .header nav .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color:#5a523a;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .header nav .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .header nav .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .header nav .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+    </style>
+</head>
+<body>
+
+   <header class="header">
+        <img class="logo" src="logo3.png" alt="Logo de la Tienda"  onclick="window.location.href='Tienda de Mueble.html'">
+
+
+<div class="text"> 
+<p class="georgia">Vieux Bois</p>      
+</div>
+<nav>
+            <div class="dropdown">
+                <a href="#salas">Salas</a>
+                <div class="dropdown-content">
+                    <a href="sofas.html">Sofás</a>
+                    <a href="sillones.html">Sillones</a>
+                    <a href="mesasc.html">Mesas de Centro</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#comedores">Comedores</a>
+                <div class="dropdown-content">
+                    <a href="mesas.html">Mesas</a>
+                    <a href="sillas.html">Sillas</a>
+                    <a href="bufferts.html">Buffets</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#recamaras">Recámaras</a>
+                <div class="dropdown-content">
+                    <a href="camas.html">Camas</a>
+                    <a href="buros.html">Burós</a>
+                    <a href="armarios.html">Armarios</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#cocinas">Cocinas</a>
+                <div class="dropdown-content">
+                    <a href="mueblesc.html">Muebles de Cocina</a>
+                    <a href="mcocina.html">Mesas de Cocina</a>
+                    <a href="sillasc.html">Sillas de Cocina</a>
+                </div>
+            </div>
+             <div class="dropdown">
+                <a href="#juveniles">Juveniles</a>
+                <div class="dropdown-content">
+                    <a href="jcamas.html">Camas</a>
+                    <a href="jescritorio.html">Escritorios</a>
+                    <a href="jsillas.html">Sillas</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#colchones">Colchones</a>
+                <div class="dropdown-content">
+                    <a href="#">Individuales</a>
+                    <a href="#">Matrimoniales</a>
+                    <a href="#">King Size</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#otros-muebles">Otros Muebles</a>
+                <div class="dropdown-content">
+                    <a href="#">Oficina</a>
+                    <a href="#">Exterior</a>
+                    <a href="#">Decoración</a>
+                </div>
+            </div>
+          
+        </nav>
+    </header>
+
+ 
+    <div class="container">
+        <h1>Venta de Muebles</h1>
+
+        <div class="product">
+            <img src="https://example.com/imagen-love-seat.jpg" alt="Sala Dalia Orange Chenille Love Seat">
+            <div class="product-info">
+                <h2>Sala Dalia Orange Chenille Love Seat (Dos)</h2>
+                <p><strong>Precio:</strong> $6,990.00</p>
+                <p><strong>Descripción:</strong> Bonita sala fabricada en tela, con cojines decorativos y una gran combinación de colores. Taburete opcional.</p>
+                <p><strong>Medidas:</strong></p>
+                <ul>
+                    <li><strong>LOVE SEAT:</strong> Largo 1.58m, Alto 84cm, Ancho 95cm</li>
+                    <li><strong>TABURETE:</strong> Largo 58cm, Alto 45cm, Ancho 58cm</li>
+                </ul>
+                <p><strong>Especificaciones Técnicas:</strong> Estructura de Madera de Pino. Forrada en tela Chenille y Jacquard 50% Poliéster y 50% algodón.</p>
+                <div class="cta-buttons">
+                    <button>Agregar al Carrito</button>
+                    <button>Comprar Ahora</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-info">
+            <h2>Formas de Pago y Envío</h2>
+            <p>Descuento adicional del 6% con el código promocional: L6VDG811 (Válido del 15 al 22 de Mayo de 2024).</p>
+            <p>Tu información siempre segura y protegida.</p>
+            <p>Envío inmediato bajo programación, contamos con stock en todos nuestros productos.</p>
+            <p>Aceptamos tarjetas de crédito y débito.</p>
+            <p>El color del producto puede variar de la imagen por cuestiones de pantalla, brillo y luz.</p>
+        </div>
+    </div>
+</body>
+</html>
